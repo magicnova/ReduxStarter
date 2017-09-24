@@ -1,15 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import SearchBar from './components/search_bar';
+import YTSearch from 'youtube-api-search';
 
-import App from './components/app';
-import reducers from './reducers';
+const API_KEY ='AIzaSyCnE27qoKjpIu5JqaeeU1YBJrg9V_y2DRo';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+YTSearch({key:API_KEY,term:'pokemon'},function(data){
+  console.log(data);
+});
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+
+const App =()=>{
+  return (
+      <div><SearchBar/></div>
+    
+  );
+}
+
+ReactDOM.render(<App />,document.querySelector('.container'));
