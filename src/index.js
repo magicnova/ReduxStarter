@@ -1,31 +1,32 @@
-import React,{Component} from 'react';
-import ReactDOM from 'react-dom';
-import SearchBar from './components/search_bar';
-import YTSearch from 'youtube-api-search';
-import VideoList from './components/video_list';
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import SearchBar from "./components/search_bar";
+import YTSearch from "youtube-api-search";
+import VideoList from "./components/video_list";
+import VideoDetail from "./components/video_detail";
 
-const API_KEY ='AIzaSyCnE27qoKjpIu5JqaeeU1YBJrg9V_y2DRo';
+const API_KEY = "AIzaSyCnE27qoKjpIu5JqaeeU1YBJrg9V_y2DRo";
 
-class App extends Component{
-  constructor(props){
+class App extends Component {
+  constructor(props) {
     super(props);
 
-    this.state={  videos:[]  };
+    this.state = { videos: [] };
 
-    YTSearch({key:API_KEY,term:'pokemon'},(videos)=>{
-      this.setState( { videos } );
+    YTSearch({ key: API_KEY, term: "pokemon" }, videos => {
+      this.setState({ videos });
     });
   }
 
-
-  render(){
-     return (
-          <div>
-              <SearchBar/>
-              <VideoList videos={this.state.videos}/>
-          </div>      
+  render() {
+    return (
+      <div>
+        <SearchBar />
+        <VideoDetail video={this.state.videos[0]} />
+        <VideoList videos={this.state.videos} />
+      </div>
     );
   }
 }
 
-ReactDOM.render(<App />,document.querySelector('.container'));
+ReactDOM.render(<App />, document.querySelector(".container"));
